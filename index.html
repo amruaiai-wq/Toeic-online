@@ -207,7 +207,7 @@ const firebaseConfig = {
           createdAt: serverTimestamp(),
           uid: currentUser.uid
         });
-        finalArea.innerHTML += `<div style='margin-top:8px;color:#16a34a'>✅ บันทึกสำเร็จ — เปิด Firebase Console → Firestore → คอลเลกชัน <code>results</code> เพื่อดูรายชื่อผู้ทำ</div>`;
+        finalArea.innerHTML += `<div style='margin-top:8px;color:#16a34a'>🎉 Congratulations! You’ve finished the test</div>`;
       } catch(err) {
         console.error(err);
         finalArea.innerHTML += `<div style='margin-top:8px;color:#dc2626'>⚠️ บันทึกไม่สำเร็จ: ${err.message}<br>ตรวจค่า firebaseConfig และกฎ Firestore</div>`;
