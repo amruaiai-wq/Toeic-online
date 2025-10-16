@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TOEIC Online Practice Test @AiAm — Reading (20 Questions)</title>
-  <meta name="description" content="TOEIC Online Practice Test — Reading Part (20 questions) with instant scoring and explanations.">
+  <title>TOEIC Online Practice Test @AiAm — Reading (บันทึกคะแนน + เฉลยไทย)</title>
+  <meta name="description" content="แบบฝึก TOEIC Reading 20 ข้อ แสดงเฉลยทันที พร้อมบันทึกชื่อและคะแนนไปยัง Firebase">
   <style>
     :root{--bg:#f5f9ff;--card:#ffffff;--accent:#0b74da;--muted:#6b7280;--success:#16a34a;--danger:#dc2626}
     *{box-sizing:border-box}
@@ -28,11 +28,11 @@
     button:disabled{opacity:.5;cursor:not-allowed}
     .result{padding:14px;border-radius:10px;margin-top:14px}
     .score{font-size:20px;font-weight:700}
-    .review{margin-top:18px}
-    .review-item{border-top:1px dashed #e6eefc;padding:12px 0}
     .correct{color:var(--success);font-weight:700}
     .incorrect{color:var(--danger);font-weight:700}
     footer.small{margin-top:18px;color:var(--muted);font-size:13px}
+    .meta{display:flex;gap:8px;align-items:center;margin:8px 0 12px;color:var(--muted)}
+    input[type=text]{padding:10px;border:1px solid #e6eefc;border-radius:10px;width:100%}
     @media(max-width:640px){.wrap{padding:12px} .question{font-size:16px}}
   </style>
 </head>
@@ -41,166 +41,177 @@
     <header>
       <div class="logo">AI</div>
       <div>
-        <h1>TOEIC Online Practice Test @AiAm — Reading</h1>
-        <p class="lead">20-question Reading practice • One question per page (Next/Previous) • Score + explanations after submission</p>
+        <h1>TOEIC Online Practice Test @AiAm — Reading (20 ข้อ)</h1>
+        <p class="lead">แสดงเฉลยพร้อมคำอธิบายภาษาไทยทันที • บันทึกชื่อและคะแนนลง Firebase</p>
       </div>
     </header>
 
     <main class="card" id="app">
-      <div class="progress" aria-hidden>
-        <i id="progressBar"></i>
+      <div class="meta">
+        <label for="username">ชื่อผู้ทำ: </label>
+        <input id="username" type="text" placeholder="พิมพ์ชื่อของคุณที่นี่" />
+        <button id="startBtn" class="ghost">เริ่มทำแบบทดสอบ</button>
       </div>
 
-      <div id="questionArea">
-        <!-- question injected here -->
-      </div>
+      <div class="progress" aria-hidden><i id="progressBar"></i></div>
+      <div id="questionArea"></div>
 
-      <div class="controls" id="controls">
-        <button class="ghost" id="prevBtn">Previous</button>
-        <div style="display:flex;gap:8px">
-          <button id="saveBtn" class="ghost">Save answer</button>
-          <button id="nextBtn">Next</button>
-        </div>
+      <div class="controls">
+        <button class="ghost" id="prevBtn" disabled>Previous</button>
+        <button id="nextBtn" disabled>Next</button>
       </div>
 
       <div id="finalArea"></div>
-
-      <p class="small">Tip: You can pick an answer then click "Save answer" before pressing Next. The system also autosaves when you go Next.</p>
     </main>
 
     <footer class="small" style="text-align:center">
-      © 2025 AiAm — TOEIC Online Practice Test. Built as a lightweight static site; host anywhere.
+      © 2025 AiAm — บันทึกผลการทำข้อสอบด้วย Firebase (โหมดตัวอย่าง)
     </footer>
   </div>
 
-  <script>
-    // Questions array (20 TOEIC-style reading questions)
+  <!-- Firebase (ES Modules) -->
+  <script type="module">
+    // 👉 1) วางค่าจาก Firebase ของคุณที่นี่
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_BUCKET",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+    signInAnonymously(auth).catch(console.error);
+    onAuthStateChanged(auth, (user)=>{ currentUser = user; });
+
+    // 👉 2) คำถาม TOEIC Reading 20 ข้อ + คำอธิบายไทย
     const QUESTIONS = [
-      {id:1, q:"Choose the best answer: The company will __________ the new software next month.", choices:["launch","launched","be launching","launches"], answer:0, expl:"'Will' + base verb — use 'launch' for future action."},
-      {id:2, q:"Choose the best word: She has been working here _____ 2018.", choices:["for","since","from","in"], answer:1, expl:"Use 'since' with a point in time (2018)."},
-      {id:3, q:"Choose the best completion: If you have any questions, please _____ to contact our support team.", choices:["feel free","feel","to feel","feel it"], answer:0, expl:"'Feel free to' is the correct phrase."},
-      {id:4, q:"Choose the correct preposition: The meeting will be held _____ the conference room on the second floor.", choices:["in","at","on","over"], answer:1, expl:"Use 'at' for a specific location like 'at the conference room'."},
-      {id:5, q:"Choose the best form: By the time the manager arrives, we _____ finished the report.", choices:["will have","have","had","will be"], answer:0, expl:"Future perfect: 'will have finished'."},
-      {id:6, q:"Choose the correct word: The shipment was delayed due to _____ weather conditions.", choices:["inclement","inclined","including","incomplete"], answer:0, expl:"'Inclement' means bad (weather)."},
-      {id:7, q:"Choose the best tense: He _____ in three different countries during his career.", choices:["lived","has lived","will live","is living"], answer:1, expl:"Present perfect 'has lived' indicates experience up to now."},
-      {id:8, q:"Choose the correct article: She gave _____ excellent presentation yesterday.", choices:["a","an","the","no article"], answer:1, expl:"'Excellent' starts with a vowel sound, so use 'an'."},
-      {id:9, q:"Choose the best connector: The CEO wanted to cut costs; _____, they postponed the project.", choices:["therefore","however","moreover","in fact"], answer:1, expl:"Contrasting idea uses 'however'."},
-      {id:10, q:"Choose the correct word: Please ensure all employees _____ the safety procedures before starting.", choices:["familiarize","are familiar with","familiarized","will be familiar"], answer:1, expl:"'Ensure + that + subject + are familiar with' is correct."},
-      {id:11, q:"Choose the correct preposition: The policy applies _____ all full-time staff.", choices:["for","to","with","on"], answer:1, expl:"'Applies to' is the correct collocation."},
-      {id:12, q:"Choose the best verb form: Neither the manager nor the assistants _____ available today.", choices:["is","are","were","be"], answer:1, expl:"When 'neither...nor' with plural nearer subject, use plural verb 'are'."},
-      {id:13, q:"Choose the correct word: The revised schedule _____ published on Monday.", choices:["was","were","is","are"], answer:0, expl:"'Schedule' is singular; past passive 'was published'."},
-      {id:14, q:"Choose the best option: He recommended _____ the contract before signing.", choices:["to review","reviewing","review","to reviewing"], answer:1, expl:"Verb 'recommend' is followed by gerund 'reviewing'."},
-      {id:15, q:"Choose the correct phrase: They offered him a position _____ marketing manager.", choices:["as","to be","for","in"], answer:0, expl:"Use 'as marketing manager'."},
-      {id:16, q:"Choose the best word: The report provides a _____ analysis of market trends.", choices:["comprehensive","comprehend","comprehending","comprehension"], answer:0, expl:"'Comprehensive' is the adjective meaning thorough."},
-      {id:17, q:"Choose correct verb: If she _____ earlier, she would have caught the train.", choices:["had left","left","would leave","leaves"], answer:0, expl:"Third conditional uses 'had left'."},
-      {id:18, q:"Choose the best completion: They insisted that the meeting _____ moved to next week.", choices:["be","is","was","will be"], answer:0, expl:"'Insist that' takes subjunctive — 'be moved'."},
-      {id:19, q:"Choose the right word: The new software is more _____ than the previous version.", choices:["user-friendly","user friendlier","more user friendly","user-friendlyer"], answer:0, expl:"'User-friendly' is the correct hyphenated adjective."},
-      {id:20, q:"Choose the correct collocation: The team was praised _____ their outstanding performance.", choices:["for","with","by","to"], answer:0, expl:"'Praised for' is correct."}
+      {q:"The company will __________ the new software next month.", choices:["launch","launched","be launching","launches"], answer:0, expl:"โครงสร้าง will + V1 ใช้ 'launch' แปลว่า 'จะเปิดตัว' ในอนาคต"},
+      {q:"She has been working here _____ 2018.", choices:["for","since","from","in"], answer:1, expl:"since + จุดเวลา (ปี 2018) / for + ระยะเวลา"},
+      {q:"If you have any questions, please _____ to contact our support team.", choices:["feel free","feel","to feel","feel it"], answer:0, expl:"สำนวน feel free to + V (เชิญตามสบาย) ถูกต้อง"},
+      {q:"The meeting will be held _____ the conference room on the second floor.", choices:["in","at","on","over"], answer:1, expl:"สถานที่เฉพาะเจาะจงนิยมใช้ at (ที่ห้องประชุมชั้น 2)"},
+      {q:"By the time the manager arrives, we _____ finished the report.", choices:["will have","have","had","will be"], answer:0, expl:"Future perfect: will have + V3 ('จะทำเสร็จก่อนเวลาหนึ่งในอนาคต')"},
+      {q:"The shipment was delayed due to _____ weather conditions.", choices:["inclement","inclined","including","incomplete"], answer:0, expl:"inclement = สภาพอากาศเลวร้าย (พายุ/ฝนหนัก) ใช้กับ weather"},
+      {q:"He _____ in three different countries during his career.", choices:["lived","has lived","will live","is living"], answer:1, expl:"Present perfect บอกประสบการณ์จนถึงปัจจุบัน: has lived"},
+      {q:"She gave _____ excellent presentation yesterday.", choices:["a","an","the","no article"], answer:1, expl:"เสียงสระ (excellent) ใช้ an"},
+      {q:"The CEO wanted to cut costs; _____, they postponed the project.", choices:["therefore","however","moreover","in fact"], answer:1, expl:"however ใช้เชื่อมความขัดแย้ง (แต่/อย่างไรก็ตาม)"},
+      {q:"Please ensure all employees _____ the safety procedures before starting.", choices:["familiarize","are familiar with","familiarized","will be familiar"], answer:1, expl:"be familiar with = คุ้นเคย/ทราบดี ต่อด้วยสิ่งที่คุ้นเคย"},
+      {q:"The policy applies _____ all full-time staff.", choices:["for","to","with","on"], answer:1, expl:"apply to + ผู้ถูกบังคับใช้ นโยบายนี้ใช้กับ (applies to) พนักงาน"},
+      {q:"Neither the manager nor the assistants _____ available today.", choices:["is","are","were","be"], answer:1, expl:"กริยาตามประธานที่ใกล้สุด (assistants เป็นพหูพจน์) ใช้ are"},
+      {q:"The revised schedule _____ published on Monday.", choices:["was","were","is","are"], answer:0, expl:"schedule เอกพจน์ + passive อดีต: was published"},
+      {q:"He recommended _____ the contract before signing.", choices:["to review","reviewing","review","to reviewing"], answer:1, expl:"recommend + gerund (V-ing): recommended reviewing"},
+      {q:"They offered him a position _____ marketing manager.", choices:["as","to be","for","in"], answer:0, expl:"offer a position as + ตำแหน่ง (as marketing manager)"},
+      {q:"The report provides a _____ analysis of market trends.", choices:["comprehensive","comprehend","comprehending","comprehension"], answer:0, expl:"ต้องการคำคุณศัพท์ (adj.): comprehensive = ครอบคลุม"},
+      {q:"If she _____ earlier, she would have caught the train.", choices:["had left","left","would leave","leaves"], answer:0, expl:"เงื่อนไขที่ 3 (อดีตไม่เป็นจริง): had + V3"},
+      {q:"They insisted that the meeting _____ moved to next week.", choices:["be","is","was","will be"], answer:0, expl:"subjunctive หลัง insisted that ใช้รูปกริยาดั้งเดิม: be moved"},
+      {q:"The new software is more _____ than the previous version.", choices:["user-friendly","user friendlier","more user friendly","user-friendlyer"], answer:0, expl:"คำคุณศัพท์ผสมถูกต้อง: user-friendly (มีขีด) และใช้ more ... than อยู่แล้ว"},
+      {q:"The team was praised _____ their outstanding performance.", choices:["for","with","by","to"], answer:0, expl:"praised for + สิ่งที่ถูกชมเชย"}
     ];
 
-    // State
+    // สถานะ
     let current = 0;
-    const answers = Array(QUESTIONS.length).fill(null); // store selected index or null
+    const answers = Array(QUESTIONS.length).fill(null);
+    let started = false;
+    let userName = "";
 
-    // Elements
-    const questionArea = document.getElementById('questionArea');
+    // อ้างอิง element
     const progressBar = document.getElementById('progressBar');
+    const questionArea = document.getElementById('questionArea');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const saveBtn = document.getElementById('saveBtn');
+    const startBtn = document.getElementById('startBtn');
+    const usernameInput = document.getElementById('username');
     const finalArea = document.getElementById('finalArea');
+
+    // เริ่มทำข้อสอบ
+    startBtn.addEventListener('click', ()=>{
+      const name = usernameInput.value.trim();
+      if(!name){ alert('กรุณาพิมพ์ชื่อก่อนเริ่มทำแบบทดสอบ'); return; }
+      userName = name;
+      started = true;
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      startBtn.disabled = true;
+      usernameInput.disabled = true;
+      renderQuestion(current);
+    });
 
     function renderQuestion(i){
       const item = QUESTIONS[i];
-      const saved = answers[i];
       progressBar.style.width = (i/QUESTIONS.length*100+5) + '%';
 
       questionArea.innerHTML = `
         <div>
-          <div class="qnum">Question ${i+1} of ${QUESTIONS.length}</div>
-          <div class="question">${escapeHtml(item.q)}</div>
-          <div class="choices" id="choices">
+          <div class="qnum">ข้อที่ ${i+1} จาก ${QUESTIONS.length}</div>
+          <div class="question">${item.q}</div>
+          <div class="choices">
             ${item.choices.map((ch, idx)=>
-              `<label class="choice" data-idx="${idx}">
-                <input type="radio" name="choice" value="${idx}" ${saved===idx? 'checked': ''}>
-                <div>${String.fromCharCode(65+idx)}. ${escapeHtml(ch)}</div>
+              `<label class='choice'>
+                <input type='radio' name='choice' value='${idx}'> ${String.fromCharCode(65+idx)}. ${ch}
               </label>`).join('')}
           </div>
-        </div>
-      `;
+          <div id='feedback' style='margin-top:12px;font-weight:600;'></div>
+          <div id='explanation' style='margin-top:6px;color:#64748b;'></div>
+        </div>`;
 
       prevBtn.disabled = i===0;
-      nextBtn.textContent = (i===QUESTIONS.length-1)? 'Submit' : 'Next';
-      finalArea.innerHTML = '';
+      nextBtn.textContent = (i===QUESTIONS.length-1)? 'Finish' : 'Next';
 
-      document.querySelectorAll('.choice').forEach(el=>{
-        el.addEventListener('click', ()=>{
-          const idx = Number(el.dataset.idx);
-          document.querySelectorAll('input[name=choice]').forEach(inp=>inp.checked=false);
-          el.querySelector('input').checked = true;
-          answers[i] = idx;
+      document.querySelectorAll('input[name=choice]').forEach((el,idx)=>{
+        el.addEventListener('change',()=>{
+          answers[i]=idx;
+          const fb=document.getElementById('feedback');
+          const ex=document.getElementById('explanation');
+          if(idx===item.answer){
+            fb.innerHTML = '<span class="correct">✅ ถูกต้อง</span>';
+          } else {
+            fb.innerHTML = `<span class="incorrect">❌ ไม่ถูกต้อง</span> (คำตอบที่ถูก: <strong>${String.fromCharCode(65+item.answer)}. ${item.choices[item.answer]}</strong>)`;
+          }
+          ex.innerHTML = 'คำอธิบาย: '+item.expl;
         });
       });
     }
 
-    function escapeHtml(text){
-      return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    }
+    prevBtn.addEventListener('click', ()=>{ if(current>0){ current--; renderQuestion(current); } });
+    nextBtn.addEventListener('click', ()=>{ if(current<QUESTIONS.length-1){ current++; renderQuestion(current); } else { showResults(); } });
 
-    prevBtn.addEventListener('click', ()=>{
-      if(current>0){ current--; renderQuestion(current); }
-    });
-
-    nextBtn.addEventListener('click', ()=>{
-      const selected = document.querySelector('input[name=choice]:checked');
-      if(selected) answers[current] = Number(selected.value);
-
-      if(current < QUESTIONS.length-1){
-        current++; renderQuestion(current);
-      } else {
-        showResults();
-      }
-    });
-
-    saveBtn.addEventListener('click', ()=>{
-      const selected = document.querySelector('input[name=choice]:checked');
-      if(selected){ answers[current] = Number(selected.value); alert('Saved!'); }
-      else alert('No answer selected yet.');
-    });
-
-    function showResults(){
-      let correctCount = 0;
-      QUESTIONS.forEach((q, idx)=>{ if(answers[idx]===q.answer) correctCount++; });
-      const percent = Math.round(correctCount / QUESTIONS.length * 100);
+    async function showResults(){
+      let correct=0;
+      QUESTIONS.forEach((q,i)=>{ if(answers[i]===q.answer) correct++; });
+      const percent = Math.round(correct/QUESTIONS.length*100);
 
       finalArea.innerHTML = `
-        <div class="result">
-          <div class="score">Score: ${correctCount} / ${QUESTIONS.length} &nbsp; (${percent}%)</div>
-          <div style="margin-top:8px;color:var(--muted)">Review each question below with explanations.</div>
-        </div>
-        <div class="review">
-          ${QUESTIONS.map((q, idx)=>{
-            const user = answers[idx];
-            const isCorrect = user===q.answer;
-            return `
-              <div class="review-item">
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div><strong>Q${idx+1}.</strong> ${escapeHtml(q.q)}</div>
-                  <div>${isCorrect? '<span class="correct">Correct</span>':'<span class="incorrect">Wrong</span>'}</div>
-                </div>
-                <div style="margin-top:8px">Your answer: ${user===null? '<em>Not answered</em>': String.fromCharCode(65+(user||0))+'. '+escapeHtml(q.choices[user])}</div>
-                <div style="margin-top:6px">Correct: <strong>${String.fromCharCode(65+q.answer)}. ${escapeHtml(q.choices[q.answer])}</strong></div>
-                <div style="margin-top:6px;color:var(--muted)">Explanation: ${escapeHtml(q.expl)}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-
+        <div class='result'>
+          <div class='score'>คะแนน: ${correct} / ${QUESTIONS.length} (${percent}%)</div>
+          <div style='margin-top:6px;color:#64748b'>บันทึกคะแนนไปยัง Firebase...</div>
+        </div>`;
       finalArea.scrollIntoView({behavior:'smooth'});
-    }
 
-    renderQuestion(current);
+      try {
+        if(!currentUser) throw new Error('ยังไม่ได้เข้าสู่ระบบแบบไม่ระบุตัวตน');
+        await addDoc(collection(db, "results"), {
+          name: userName,
+          score: correct,
+          total: QUESTIONS.length,
+          percent: percent,
+          createdAt: serverTimestamp(),
+          uid: currentUser.uid
+        });
+        finalArea.innerHTML += `<div style='margin-top:8px;color:#16a34a'>✅ บันทึกสำเร็จ — เปิด Firebase Console → Firestore → คอลเลกชัน <code>results</code> เพื่อดูรายชื่อผู้ทำ</div>`;
+      } catch(err) {
+        console.error(err);
+        finalArea.innerHTML += `<div style='margin-top:8px;color:#dc2626'>⚠️ บันทึกไม่สำเร็จ: ${err.message}<br>ตรวจค่า firebaseConfig และกฎ Firestore</div>`;
+      }
+    }
   </script>
 </body>
 </html>
