@@ -3,216 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TOEIC Online Practice Test @AiAm — Reading (บันทึกคะแนน + เฉลยไทย)</title>
-  <meta name="description" content="แบบฝึก TOEIC Reading 20 ข้อ แสดงเฉลยทันที">
+  <title>AiAm practice exam online — รวมข้อสอบหลายหมวด</title>
   <style>
-    :root{--bg:#f5f9ff;--card:#ffffff;--accent:#0b74da;--muted:#6b7280;--success:#16a34a;--danger:#dc2626}
-    *{box-sizing:border-box}
-    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#0f172a}
-    .wrap{max-width:880px;margin:28px auto;padding:20px}
-    header{display:flex;align-items:center;gap:14px}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3aa0ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:6px 0 18px;color:var(--muted)}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(11,37,71,0.06)}
-    .progress{height:10px;background:#e6eefc;border-radius:999px;overflow:hidden;margin:12px 0}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#38bdf8);width:0}
-    .qnum{font-weight:600;color:var(--accent)}
-    .question{margin:8px 0 16px;font-size:18px}
-    .choices{display:flex;flex-direction:column;gap:10px}
-    .choice{border:1px solid #e6eefc;padding:12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:12px}
-    .choice input{accent-color:var(--accent)}
-    .controls{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
-    button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
-    button.ghost{background:transparent;color:var(--accent);border:1px solid #e6eefc}
-    button:disabled{opacity:.5;cursor:not-allowed}
-    .result{padding:14px;border-radius:10px;margin-top:14px}
-    .score{font-size:20px;font-weight:700}
-    .correct{color:var(--success);font-weight:700}
-    .incorrect{color:var(--danger);font-weight:700}
-    footer.small{margin-top:18px;color:var(--muted);font-size:13px}
-    .meta{display:flex;gap:8px;align-items:center;margin:8px 0 12px;color:var(--muted)}
-    input[type=text]{padding:10px;border:1px solid #e6eefc;border-radius:10px;width:100%}
-    @media(max-width:640px){.wrap{padding:12px} .question{font-size:16px}}
+    body {font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:#f8fafc; color:#0f172a;}
+    header {background:linear-gradient(135deg,#0b74da,#38bdf8);color:#fff;text-align:center;padding:32px;}
+    header h1{margin:0;font-size:28px}
+    header p{margin:6px 0 0;font-size:16px;color:#e2e8f0}
+    main {max-width:980px;margin:40px auto;padding:0 20px;}
+    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+    .card {background:#fff;border-radius:14px;padding:20px;box-shadow:0 6px 20px rgba(11,37,71,0.06);cursor:pointer;transition:.2s;}
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(11,37,71,0.1);}
+    .card h2{margin:0 0 8px;font-size:20px;color:#0b74da}
+    .card p{margin:0;color:#64748b;font-size:14px}
+    footer{text-align:center;margin:30px;color:#64748b;font-size:13px}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">AM</div>
-      <div>
-        <h1>TOEIC Online Practice Test @AiAm — Reading (20 ข้อ)</h1>
-        <p class="lead">แสดงเฉลยพร้อมคำอธิบายภาษาไทยทันที</p>
+  <header>
+    <h1>AiAm practice exam online</h1>
+    <p>ทำฟรี ดูเฉลยชุดแรกฟรี • สมาชิก Premium ปลดล็อกเฉลยทั้งหมด</p>
+  </header>
+
+  <main>
+    <h2 style="text-align:center;margin-bottom:24px;">เลือกหมวดข้อสอบ</h2>
+    <div class="grid">
+      <div class="card" onclick="goTo('toeic')">
+        <h2>TOEIC</h2>
+        <p>แบบทดสอบภาษาอังกฤษเพื่อการสื่อสาร</p>
       </div>
-    </header>
-
-    <main class="card" id="app">
-      <div class="meta">
-        <label for="username">ชื่อผู้ทำ: </label>
-        <input id="username" type="text" placeholder="พิมพ์ชื่อของคุณที่นี่" />
-        <button id="startBtn" class="ghost">เริ่มทำแบบทดสอบ</button>
+      <div class="card" onclick="goTo('pakor')">
+        <h2>ข้อสอบภาค ก.</h2>
+        <p>สำหรับเตรียมสอบข้าราชการ ก.พ.</p>
       </div>
-
-      <div class="progress" aria-hidden><i id="progressBar"></i></div>
-      <div id="questionArea"></div>
-
-      <div class="controls">
-        <button class="ghost" id="prevBtn" disabled>Previous</button>
-        <button id="nextBtn" disabled>Next</button>
+      <div class="card" onclick="goTo('police')">
+        <h2>ข้อสอบนายร้อยตำรวจ</h2>
+        <p>ข้อสอบเตรียมเข้ารับราชการตำรวจ</p>
       </div>
+      <div class="card" onclick="goTo('english')">
+        <h2>ภาษาอังกฤษทั่วไป</h2>
+        <p>ฝึกทักษะอ่าน/ศัพท์/ไวยากรณ์</p>
+      </div>
+    </div>
+  </main>
 
-      <div id="finalArea"></div>
-    </main>
+  <footer>© 2025 AiAm practice exam online</footer>
 
-    <footer class="small" style="text-align:center">
-      © 2025 AiAm - Always practice and improve your skill
-    </footer>
-  </div>
-
-  <!-- Firebase (ES Modules) -->
-  <script type="module">
-    // 👉 1) วางค่าจาก Firebase ของคุณที่นี่
-const firebaseConfig = {
-  apiKey: "AIzaSyAD2uYOi5z_9OqleDDM_N0m5skEyXAnhxU",
-  authDomain: "toeic-online-e9648.firebaseapp.com",
-  projectId: "toeic-online-e9648",
-  storageBucket: "toeic-online-e9648.appspot.com",
-  messagingSenderId: "1052262804229",
-  appId: "1:1052262804229:web:bd06374570c5ab2d44256c",
-  measurementId: "G-7SFMZYNS43"
-};
-// Initialize Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    let currentUser = null;
-    signInAnonymously(auth).catch(console.error);
-    onAuthStateChanged(auth, (user)=>{ currentUser = user; });
-
-    // 👉 2) คำถาม TOEIC Reading 20 ข้อ + คำอธิบายไทย
-    const QUESTIONS = [
-      {q:"The company will __________ the new software next month.", choices:["launch","launched","be launching","launches"], answer:0, expl:"โครงสร้าง will + V1 ใช้ 'launch' แปลว่า 'จะเปิดตัว' ในอนาคต"},
-      {q:"She has been working here _____ 2018.", choices:["for","since","from","in"], answer:1, expl:"since + จุดเวลา (ปี 2018) / for + ระยะเวลา"},
-      {q:"If you have any questions, please _____ to contact our support team.", choices:["feel free","feel","to feel","feel it"], answer:0, expl:"สำนวน feel free to + V (เชิญตามสบาย) ถูกต้อง"},
-      {q:"The meeting will be held _____ the conference room on the second floor.", choices:["in","at","on","over"], answer:1, expl:"สถานที่เฉพาะเจาะจงนิยมใช้ at (ที่ห้องประชุมชั้น 2)"},
-      {q:"By the time the manager arrives, we _____ finished the report.", choices:["will have","have","had","will be"], answer:0, expl:"Future perfect: will have + V3 ('จะทำเสร็จก่อนเวลาหนึ่งในอนาคต')"},
-      {q:"The shipment was delayed due to _____ weather conditions.", choices:["inclement","inclined","including","incomplete"], answer:0, expl:"inclement = สภาพอากาศเลวร้าย (พายุ/ฝนหนัก) ใช้กับ weather"},
-      {q:"He _____ in three different countries during his career.", choices:["lived","has lived","will live","is living"], answer:1, expl:"Present perfect บอกประสบการณ์จนถึงปัจจุบัน: has lived"},
-      {q:"She gave _____ excellent presentation yesterday.", choices:["a","an","the","no article"], answer:1, expl:"เสียงสระ (excellent) ใช้ an"},
-      {q:"The CEO wanted to cut costs; _____, they postponed the project.", choices:["therefore","however","moreover","in fact"], answer:1, expl:"however ใช้เชื่อมความขัดแย้ง (แต่/อย่างไรก็ตาม)"},
-      {q:"Please ensure all employees _____ the safety procedures before starting.", choices:["familiarize","are familiar with","familiarized","will be familiar"], answer:1, expl:"be familiar with = คุ้นเคย/ทราบดี ต่อด้วยสิ่งที่คุ้นเคย"},
-      {q:"The policy applies _____ all full-time staff.", choices:["for","to","with","on"], answer:1, expl:"apply to + ผู้ถูกบังคับใช้ นโยบายนี้ใช้กับ (applies to) พนักงาน"},
-      {q:"Neither the manager nor the assistants _____ available today.", choices:["is","are","were","be"], answer:1, expl:"กริยาตามประธานที่ใกล้สุด (assistants เป็นพหูพจน์) ใช้ are"},
-      {q:"The revised schedule _____ published on Monday.", choices:["was","were","is","are"], answer:0, expl:"schedule เอกพจน์ + passive อดีต: was published"},
-      {q:"He recommended _____ the contract before signing.", choices:["to review","reviewing","review","to reviewing"], answer:1, expl:"recommend + gerund (V-ing): recommended reviewing"},
-      {q:"They offered him a position _____ marketing manager.", choices:["as","to be","for","in"], answer:0, expl:"offer a position as + ตำแหน่ง (as marketing manager)"},
-      {q:"The report provides a _____ analysis of market trends.", choices:["comprehensive","comprehend","comprehending","comprehension"], answer:0, expl:"ต้องการคำคุณศัพท์ (adj.): comprehensive = ครอบคลุม"},
-      {q:"If she _____ earlier, she would have caught the train.", choices:["had left","left","would leave","leaves"], answer:0, expl:"เงื่อนไขที่ 3 (อดีตไม่เป็นจริง): had + V3"},
-      {q:"They insisted that the meeting _____ moved to next week.", choices:["be","is","was","will be"], answer:0, expl:"subjunctive หลัง insisted that ใช้รูปกริยาดั้งเดิม: be moved"},
-      {q:"The new software is more _____ than the previous version.", choices:["user-friendly","user friendlier","more user friendly","user-friendlyer"], answer:0, expl:"คำคุณศัพท์ผสมถูกต้อง: user-friendly (มีขีด) และใช้ more ... than อยู่แล้ว"},
-      {q:"The team was praised _____ their outstanding performance.", choices:["for","with","by","to"], answer:0, expl:"praised for + สิ่งที่ถูกชมเชย"}
-    ];
-
-    // สถานะ
-    let current = 0;
-    const answers = Array(QUESTIONS.length).fill(null);
-    let started = false;
-    let userName = "";
-
-    // อ้างอิง element
-    const progressBar = document.getElementById('progressBar');
-    const questionArea = document.getElementById('questionArea');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const startBtn = document.getElementById('startBtn');
-    const usernameInput = document.getElementById('username');
-    const finalArea = document.getElementById('finalArea');
-
-    // เริ่มทำข้อสอบ
-    startBtn.addEventListener('click', ()=>{
-      const name = usernameInput.value.trim();
-      if(!name){ alert('กรุณาพิมพ์ชื่อก่อนเริ่มทำแบบทดสอบ'); return; }
-      userName = name;
-      started = true;
-      prevBtn.disabled = false;
-      nextBtn.disabled = false;
-      startBtn.disabled = true;
-      usernameInput.disabled = true;
-      renderQuestion(current);
-    });
-
-    function renderQuestion(i){
-      const item = QUESTIONS[i];
-      progressBar.style.width = (i/QUESTIONS.length*100+5) + '%';
-
-      questionArea.innerHTML = `
-        <div>
-          <div class="qnum">ข้อที่ ${i+1} จาก ${QUESTIONS.length}</div>
-          <div class="question">${item.q}</div>
-          <div class="choices">
-            ${item.choices.map((ch, idx)=>
-              `<label class='choice'>
-                <input type='radio' name='choice' value='${idx}'> ${String.fromCharCode(65+idx)}. ${ch}
-              </label>`).join('')}
-          </div>
-          <div id='feedback' style='margin-top:12px;font-weight:600;'></div>
-          <div id='explanation' style='margin-top:6px;color:#64748b;'></div>
-        </div>`;
-
-      prevBtn.disabled = i===0;
-      nextBtn.textContent = (i===QUESTIONS.length-1)? 'Finish' : 'Next';
-
-      document.querySelectorAll('input[name=choice]').forEach((el,idx)=>{
-        el.addEventListener('change',()=>{
-          answers[i]=idx;
-          const fb=document.getElementById('feedback');
-          const ex=document.getElementById('explanation');
-          if(idx===item.answer){
-            fb.innerHTML = '<span class="correct">✅ ถูกต้อง</span>';
-          } else {
-            fb.innerHTML = `<span class="incorrect">❌ ไม่ถูกต้อง</span> (คำตอบที่ถูก: <strong>${String.fromCharCode(65+item.answer)}. ${item.choices[item.answer]}</strong>)`;
-          }
-          ex.innerHTML = 'คำอธิบาย: '+item.expl;
-        });
-      });
-    }
-
-    prevBtn.addEventListener('click', ()=>{ if(current>0){ current--; renderQuestion(current); } });
-    nextBtn.addEventListener('click', ()=>{ if(current<QUESTIONS.length-1){ current++; renderQuestion(current); } else { showResults(); } });
-
-    async function showResults(){
-      let correct=0;
-      QUESTIONS.forEach((q,i)=>{ if(answers[i]===q.answer) correct++; });
-      const percent = Math.round(correct/QUESTIONS.length*100);
-
-      finalArea.innerHTML = `
-        <div class='result'>
-          <div class='score'>คะแนน: ${correct} / ${QUESTIONS.length} (${percent}%)</div>
-          <div style='margin-top:6px;color:#64748b'>บันทึกคะแนนไปยัง Firebase...</div>
-        </div>`;
-      finalArea.scrollIntoView({behavior:'smooth'});
-
-      try {
-        if(!currentUser) throw new Error('ยังไม่ได้เข้าสู่ระบบแบบไม่ระบุตัวตน');
-        await addDoc(collection(db, "results"), {
-          name: userName,
-          score: correct,
-          total: QUESTIONS.length,
-          percent: percent,
-          createdAt: serverTimestamp(),
-          uid: currentUser.uid
-        });
-        finalArea.innerHTML += `<div style='margin-top:8px;color:#16a34a'>🎉 Congratulations! You’ve finished the test</div>`;
-      } catch(err) {
-        console.error(err);
-        finalArea.innerHTML += `<div style='margin-top:8px;color:#dc2626'>⚠️ บันทึกไม่สำเร็จ: ${err.message}<br>ตรวจค่า firebaseConfig และกฎ Firestore</div>`;
-      }
-    }
+  <script>
+    function goTo(cat){ window.location.href = `tests.html?category=${cat}`; }
   </script>
 </body>
 </html>
