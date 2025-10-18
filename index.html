@@ -1,55 +1,12 @@
-<!doctype html>
-<html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AiAm practice exam online — รวมข้อสอบหลายหมวด</title>
-  <style>
-    body {font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:#f8fafc; color:#0f172a;}
-    header {background:linear-gradient(135deg,#0b74da,#38bdf8);color:#fff;text-align:center;padding:32px;}
-    header h1{margin:0;font-size:28px}
-    header p{margin:6px 0 0;font-size:16px;color:#e2e8f0}
-    main {max-width:980px;margin:40px auto;padding:0 20px;}
-    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
-    .card {background:#fff;border-radius:14px;padding:20px;box-shadow:0 6px 20px rgba(11,37,71,0.06);cursor:pointer;transition:.2s;}
-    .card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(11,37,71,0.1);}
-    .card h2{margin:0 0 8px;font-size:20px;color:#0b74da}
-    .card p{margin:0;color:#64748b;font-size:14px}
-    footer{text-align:center;margin:30px;color:#64748b;font-size:13px}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>AiAm practice exam online</h1>
-    <p>ทำฟรี ดูเฉลยชุดแรกฟรี • สมาชิก Premium ปลดล็อกเฉลยทั้งหมด</p>
-  </header>
-
-  <main>
-    <h2 style="text-align:center;margin-bottom:24px;">เลือกหมวดข้อสอบ</h2>
-    <div class="grid">
-      <div class="card" onclick="goTo('toeic')">
-        <h2>TOEIC</h2>
-        <p>แบบทดสอบภาษาอังกฤษเพื่อการสื่อสาร</p>
-      </div>
-      <div class="card" onclick="goTo('pakor')">
-        <h2>ข้อสอบภาค ก.</h2>
-        <p>สำหรับเตรียมสอบข้าราชการ ก.พ.</p>
-      </div>
-      <div class="card" onclick="goTo('police')">
-        <h2>ข้อสอบนายร้อยตำรวจ</h2>
-        <p>ข้อสอบเตรียมเข้ารับราชการตำรวจ</p>
-      </div>
-      <div class="card" onclick="goTo('english')">
-        <h2>ภาษาอังกฤษทั่วไป</h2>
-        <p>ฝึกทักษะอ่าน/ศัพท์/ไวยากรณ์</p>
-      </div>
-    </div>
-  </main>
-
-  <footer>© 2025 AiAm practice exam online</footer>
-
-  <script>
-    function goTo(cat){ window.location.href = `tests.html?category=${cat}`; }
-  </script>
-</body>
-</html>
+<!doctype html><html lang="th"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AiAm practice exam online — หลายหมวด</title>
+<style>body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;margin:0;background:#f8fafc;color:#0f172a}header{background:linear-gradient(135deg,#0b74da,#38bdf8);color:#fff;text-align:center;padding:32px}main{max-width:960px;margin:32px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(11,37,71,.06);cursor:pointer}.card h2{margin:0 0 8px;color:#0b74da;font-size:20px}.muted{color:#64748b}.foot{margin-top:22px;text-align:center;color:#64748b;font-size:13px}</style>
+</head><body><header><h1>AiAm practice exam online</h1><p>TOEIC 20 ชุด • ชุด 1 เฉลยละเอียด • ชุด 2–9 เฉลยถูก/ผิด • ชุด 10–20 พรีเมียม</p></header>
+<main><div class="grid">
+<div class="card" onclick="go('toeic')"><h2>TOEIC</h2><div class="muted">20 ชุด × 20 ข้อ</div></div>
+<div class="card" onclick="go('pakor')"><h2>ข้อสอบภาค ก.</h2><div class="muted">ค่อย ๆ เพิ่มภายหลัง</div></div>
+<div class="card" onclick="go('police')"><h2>นายร้อยตำรวจ</h2><div class="muted">ค่อย ๆ เพิ่มภายหลัง</div></div>
+<div class="card" onclick="go('english')"><h2>อังกฤษทั่วไป</h2><div class="muted">ค่อย ๆ เพิ่มภายหลัง</div></div>
+</div><p class="foot">Tip: ไปหน้าแอดมินได้ที่ <code>/admin.html</code></p></main>
+<script>function go(c){location.href='tests.html?category='+c;}</script></body></html>

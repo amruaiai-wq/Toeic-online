@@ -1,98 +1,119 @@
-<!doctype html>
-<html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin Dashboard — AiAm practice exam online</title>
-  <style>
-    body {font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 0; background: #f8fafc; color: #0f172a;}
-    header {background: linear-gradient(135deg, #0b74da, #3aa0ff); color: white; padding: 18px 24px; text-align: center; font-size: 22px; font-weight: 700;}
-    main {max-width: 980px; margin: 28px auto; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 6px 20px rgba(11,37,71,0.06);}
-    table {width: 100%; border-collapse: collapse; margin-top: 16px;}
-    th, td {text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2e8f0;}
-    th {background: #f1f5f9; color: #334155;}
-    tr:hover {background: #f9fafb;}
-    .score {font-weight: 600; color: #0b74da;}
-    .percent {color: #0d9488; font-weight: 600;}
-    footer {text-align: center; margin-top: 20px; color: #64748b; font-size: 13px;}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .badge{background:#e2e8f0;color:#334155;border-radius:999px;padding:6px 10px;font-size:12px}
-  </style>
-</head>
+<!doctype html><html lang="th"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Admin Dashboard — AiAm practice exam online</title>
+<style>
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;margin:0;background:#f8fafc;color:#0f172a}
+header{background:linear-gradient(135deg,#0b74da,#3aa0ff);color:#fff;padding:18px 24px;text-align:center;font-size:22px;font-weight:700}
+main{max-width:1100px;margin:28px auto;padding:0 16px}
+.card{background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(11,37,71,.06);padding:16px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi h3{margin:0;color:#64748b;font-size:13px} .kpi .v{font-size:24px;font-weight:800;margin-top:6px;color:#0b74da}
+.table{overflow:auto} table{width:100%;border-collapse:collapse} th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #e2e8f0} th{background:#f1f5f9;color:#334155}
+.badge{background:#e2e8f0;color:#334155;border-radius:999px;padding:6px 10px;font-size:12px}
+.chart{height:220px}
+</style></head>
 <body>
-  <header>🧭 AiAm practice exam online — Admin Dashboard</header>
-  <main>
-    <div class="topbar">
-      <h2>รายชื่อผู้ทำข้อสอบ</h2>
+<header>🧭 AiAm practice exam online — Admin Dashboard</header>
+<main>
+  <div class="grid">
+    <div class="card kpi"><h3>จำนวนการทำข้อสอบทั้งหมด</h3><div class="v" id="k_total">0</div></div>
+    <div class="card kpi"><h3>คะแนนเฉลี่ย (%)</h3><div class="v" id="k_avg">0</div></div>
+    <div class="card kpi"><h3>ผู้ทำข้อสอบ (ชื่อไม่ซ้ำ)</h3><div class="v" id="k_users">0</div></div>
+    <div class="card kpi"><h3>ทำข้อสอบวันนี้</h3><div class="v" id="k_today">0</div></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 8px;">Top Tests by Attempts</h3>
+    <div id="bar" class="chart"></div>
+  </div>
+
+  <div class="card table">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="margin:0;">รายการทั้งหมด</h3>
       <span class="badge" id="countBadge">0 records</span>
     </div>
-    <p>ดึงข้อมูลจาก Firestore คอลเลกชัน <code>results</code> แบบเรียลไทม์</p>
-
-    <table id="resultsTable">
-      <thead>
-        <tr>
-          <th>ชื่อผู้ทำ</th>
-          <th>คะแนน</th>
-          <th>เปอร์เซ็นต์</th>
-          <th>ชุดข้อสอบ</th>
-          <th>วันที่</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td colspan="5">⏳ กำลังโหลดข้อมูล...</td></tr>
-      </tbody>
+    <table id="t">
+      <thead><tr><th>ชื่อผู้ทำ</th><th>คะแนน</th><th>เปอร์เซ็นต์</th><th>ชุดข้อสอบ</th><th>วันที่</th></tr></thead>
+      <tbody><tr><td colspan="5">⏳ กำลังโหลดข้อมูล...</td></tr></tbody>
     </table>
-  </main>
-  <footer>© 2025 AiAm practice exam online</footer>
+  </div>
+</main>
 
-  <script type="module">
-    // ใส่ firebaseConfig ของคุณ
-const firebaseConfig = {
-  apiKey: "AIzaSyAD2uYOi5z_9OqleDDM_N0m5skEyXAnhxU",
-  authDomain: "toeic-online-e9648.firebaseapp.com",
-  projectId: "toeic-online-e9648",
-  storageBucket: "toeic-online-e9648.firebasestorage.app",
-  messagingSenderId: "1052262804229",
-  appId: "1:1052262804229:web:bd06374570c5ab2d44256c",
-  measurementId: "G-7SFMZYNS43"
-};
+<script type="module">
+const firebaseConfig={apiKey:"YOUR_API_KEY",authDomain:"YOUR_AUTH_DOMAIN",projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_BUCKET",messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"};
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const tbody = document.querySelector("#t tbody");
+const badge = document.getElementById("countBadge");
+const k_total = document.getElementById("k_total");
+const k_avg = document.getElementById("k_avg");
+const k_users = document.getElementById("k_users");
+const k_today = document.getElementById("k_today");
+const bar = document.getElementById("bar");
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+function drawBar(data) {
+  const max = Math.max(1, ...data.map(d=>d[1]));
+  const bars = data.map(d=>{
+    const w = Math.round(d[1]/max*100);
+    return `<div style="display:flex;align-items:center;margin:6px 0;">
+      <div style="width:140px;font-size:12px;color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${d[0]}</div>
+      <div style="flex:1;background:#e2e8f0;height:10px;border-radius:999px;margin:0 8px;overflow:hidden;">
+        <i style="display:block;height:10px;width:${w}%;background:linear-gradient(90deg,#0b74da,#38bdf8);"></i>
+      </div>
+      <div style="width:30px;text-align:right;font-weight:700;color:#0b74da">${d[1]}</div>
+    </div>`;
+  }).join("");
+  bar.innerHTML = bars || "<div style='color:#64748b'>ยังไม่มีข้อมูลเพียงพอ</div>";
+}
 
-    const tableBody = document.querySelector("#resultsTable tbody");
-    const countBadge = document.getElementById("countBadge");
+function isToday(ts) {
+  if(!ts?.toDate) return false;
+  const d = ts.toDate();
+  const t = new Date();
+  return d.getFullYear()===t.getFullYear() && d.getMonth()===t.getMonth() && d.getDate()===t.getDate();
+}
 
-    const q = query(collection(db, "results"), orderBy("createdAt", "desc"));
-    onSnapshot(q, (snapshot) => {
-      if (snapshot.empty) {
-        tableBody.innerHTML = "<tr><td colspan='5'>ยังไม่มีข้อมูลการทำข้อสอบ</td></tr>";
-        countBadge.textContent = "0 records";
-        return;
-      }
+onSnapshot(query(collection(db, "results"), orderBy("createdAt","desc")), (snap)=>{
+  if (snap.empty) {
+    tbody.innerHTML = "<tr><td colspan='5'>ยังไม่มีข้อมูลการทำข้อสอบ</td></tr>";
+    badge.textContent = "0 records";
+    k_total.textContent = "0";
+    k_avg.textContent = "0";
+    k_users.textContent = "0";
+    k_today.textContent = "0";
+    drawBar([]);
+    return;
+  }
+  const rows = [];
+  let total=0, avgSum=0, todayCount=0;
+  const users = new Set();
+  const testCount = new Map();
 
-      tableBody.innerHTML = "";
-      countBadge.textContent = snapshot.size + " records";
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const date = data.createdAt?.toDate
-          ? data.createdAt.toDate().toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" })
-          : "-";
-        const row = `
-          <tr>
-            <td>${data.name || "-"}</td>
-            <td class="score">${data.score}/${data.total}</td>
-            <td class="percent">${data.percent}%</td>
-            <td>${data.testId || "-"}</td>
-            <td>${date}</td>
-          </tr>
-        `;
-        tableBody.innerHTML += row;
-      });
-    });
-  </script>
-</body>
-</html>
+  snap.forEach(doc=>{
+    const d = doc.data();
+    users.add(d.name||"-");
+    total++;
+    avgSum += (d.percent||0);
+    if(isToday(d.createdAt)) todayCount++;
+    const tname = d.testId||"-";
+    testCount.set(tname, (testCount.get(tname)||0)+1);
+
+    const date = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString("th-TH", { dateStyle:"medium", timeStyle:"short" }) : "-";
+    rows.push(`<tr><td>${d.name||"-"}</td><td class='score'>${d.score}/${d.total}</td><td class='percent'>${d.percent}%</td><td>${tname}</td><td>${date}</td></tr>`);
+  });
+
+  tbody.innerHTML = rows.join("");
+  badge.textContent = total + " records";
+  k_total.textContent = total.toString();
+  k_avg.textContent = Math.round(avgSum/total) + "%";
+  k_users.textContent = users.size.toString();
+  k_today.textContent = todayCount.toString();
+
+  const top = Array.from(testCount.entries()).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  drawBar(top);
+});
+</script>
+</body></html>

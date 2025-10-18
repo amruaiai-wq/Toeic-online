@@ -1,66 +1,23 @@
-<!doctype html>
-<html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>เลือกชุดข้อสอบ | AiAm practice exam online</title>
-  <style>
-    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:#f8fafc;color:#0f172a;margin:0;}
-    header{background:#0b74da;color:white;text-align:center;padding:24px;font-size:20px;}
-    main{max-width:900px;margin:30px auto;padding:0 16px;}
-    .set{background:white;border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(11,37,71,0.06);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
-    button{padding:10px 14px;border-radius:8px;border:0;font-weight:600;cursor:pointer;}
-    .free{background:#0b74da;color:white;}
-    .premium{background:#e2e8f0;color:#475569;}
-    a.btn{display:inline-block;text-decoration:none}
-  </style>
-</head>
-<body>
-  <header id="categoryTitle">ชุดข้อสอบ</header>
-  <main id="testList">กำลังโหลด...</main>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get("category") || "toeic";
-    const testList = document.getElementById("testList");
-    const titleMap = {
-      toeic: "TOEIC Test",
-      pakor: "ข้อสอบภาค ก.",
-      police: "ข้อสอบนายร้อยตำรวจ",
-      english: "ภาษาอังกฤษทั่วไป"
-    };
-    document.getElementById("categoryTitle").innerText = titleMap[category] || "ชุดข้อสอบ";
-
-    // ตัวอย่างข้อมูล — ภายหลังย้ายไป Firestore ได้
-    const TESTS = {
-      toeic: [
-        {id:"toeic-set1",title:"TOEIC Reading Set 1 (ฟรี + เฉลย)",isFree:true},
-        {id:"toeic-set2",title:"TOEIC Reading Set 2 (Premium)",isFree:false}
-      ],
-      pakor: [
-        {id:"pakor-set1",title:"ข้อสอบภาค ก. ชุดที่ 1 (ฟรี + เฉลย)",isFree:true},
-        {id:"pakor-set2",title:"ข้อสอบภาค ก. ชุดที่ 2 (Premium)",isFree:false}
-      ],
-      police: [
-        {id:"police-set1",title:"ข้อสอบนายร้อย ชุดที่ 1 (ฟรี + เฉลย)",isFree:true}
-      ],
-      english: [
-        {id:"eng-set1",title:"English Vocabulary Set 1 (ฟรี + เฉลย)",isFree:true}
-      ]
-    };
-
-    const tests = TESTS[category] || [];
-    testList.innerHTML = tests.map(t => `
-      <div class="set">
-        <div>
-          <strong>${t.title}</strong><br>
-          ${t.isFree ? "ทำฟรี / ดูเฉลยได้เฉพาะชุดนี้" : "ดูเฉลยได้เฉพาะสมาชิก Premium"}
-        </div>
-        ${t.isFree
-          ? `<a class="btn" href="exam.html?test=${t.id}"><button class="free">เริ่มทำ</button></a>`
-          : `<a class="btn" href="premium.html"><button class="premium">สมัคร Premium</button></a>`}
-      </div>
-    `).join("");
-  </script>
-</body>
-</html>
+<!doctype html><html lang="th"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>เลือกชุดข้อสอบ | AiAm practice exam online</title>
+<style>body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:#f8fafc;color:#0f172a;margin:0}header{background:#0b74da;color:#fff;text-align:center;padding:24px}main{max-width:980px;margin:30px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(11,37,71,.06)}.card h3{margin:0 0 6px;color:#0b74da;font-size:18px}.muted{color:#64748b;font-size:13px}.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;margin-top:6px}.free{background:#e0f2fe;color:#0369a1}.lite{background:#fef3c7;color:#92400e}.premium{background:#fee2e2;color:#991b1b}.actions{margin-top:10px}button{padding:9px 12px;border-radius:8px;border:0;font-weight:600;cursor:pointer}.start{background:#0b74da;color:#fff}.lock{background:#e2e8f0;color:#475569}</style>
+</head><body><header id="categoryTitle">ชุดข้อสอบ</header><main><div id="list" class="grid"></div></main>
+<script>
+const p = new URLSearchParams(location.search); const cat = p.get('category') || 'toeic';
+document.getElementById('categoryTitle').innerText = ({toeic:'TOEIC Test', pakor:'ข้อสอบภาค ก.', police:'ข้อสอบนายร้อยตำรวจ', english:'ภาษาอังกฤษทั่วไป'})[cat] || 'ชุดข้อสอบ';
+const TESTS = {
+  toeic: [{"id": "toeic-set1", "title": "TOEIC Practice Test 1", "mode": "free-full", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set2", "title": "TOEIC Practice Test 2", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set3", "title": "TOEIC Practice Test 3", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set4", "title": "TOEIC Practice Test 4", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set5", "title": "TOEIC Practice Test 5", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set6", "title": "TOEIC Practice Test 6", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set7", "title": "TOEIC Practice Test 7", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set8", "title": "TOEIC Practice Test 8", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set9", "title": "TOEIC Practice Test 9", "mode": "free-lite", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set10", "title": "TOEIC Practice Test 10", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set11", "title": "TOEIC Practice Test 11", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set12", "title": "TOEIC Practice Test 12", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set13", "title": "TOEIC Practice Test 13", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set14", "title": "TOEIC Practice Test 14", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set15", "title": "TOEIC Practice Test 15", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set16", "title": "TOEIC Practice Test 16", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set17", "title": "TOEIC Practice Test 17", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set18", "title": "TOEIC Practice Test 18", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set19", "title": "TOEIC Practice Test 19", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"},{"id": "toeic-set20", "title": "TOEIC Practice Test 20", "mode": "premium", "desc": "รวม Grammar / Vocabulary / Reading / Cloze (20 ข้อ)"}],
+  pakor:[{id:'pakor-set1',title:'ภาค ก. ชุดที่ 1 (ฟรี)',mode:'free-full',desc:'แนวทั่วไป ภาษาไทย คณิต เหตุผล'}],
+  police:[{id:'police-set1',title:'นายร้อย ชุดที่ 1 (ฟรี)',mode:'free-full',desc:'ความรู้ทั่วไป + จริยธรรม'}],
+  english:[{id:'eng-set1',title:'Vocabulary Test 1 (ฟรี)',mode:'free-full',desc:'คำศัพท์พื้นฐาน'}]
+};
+const list = document.getElementById('list');
+const arr = TESTS[cat]||[];
+list.innerHTML = arr.map(t=>{
+  const badge = t.mode==='free-full' ? "<span class='badge free'>ฟรี + เฉลยละเอียด</span>" : t.mode==='free-lite' ? "<span class='badge lite'>ฟรี: เฉลยถูก/ผิด</span>" : "<span class='badge premium'>Premium</span>";
+  const href = t.mode==='premium' ? "premium.html" : `exam.html?test=${t.id}&mode=${t.mode}`;
+  const btn = t.mode==='premium' ? "<button class='lock'>สมัคร Premium</button>" : "<button class='start'>เริ่มทำ</button>";
+  return `<div class='card'><h3>${t.title}</h3><div class='muted'>${t.desc||''}</div>${badge}<div class='actions'><a href='${href}'>${btn}</a></div></div>`;
+}).join('');
+</script></body></html>
