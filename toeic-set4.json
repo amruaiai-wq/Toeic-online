@@ -1,0 +1,222 @@
+[
+  {
+    "q": "She bought ___ new printer yesterday.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "___ urgent memo was sent to all staff.",
+    "choices": [
+      "A",
+      "An",
+      "The",
+      "No article"
+    ],
+    "answer": 1,
+    "expl": "เสียงสระ (urgent) ใช้ An."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "Please submit the report ___ email.",
+    "choices": [
+      "by",
+      "via",
+      "with",
+      "on"
+    ],
+    "answer": 1,
+    "expl": "ช่องทาง → via email."
+  },
+  {
+    "q": "By next week, they ___ the system upgrade.",
+    "choices": [
+      "finish",
+      "will have finished",
+      "have finished",
+      "are finishing"
+    ],
+    "answer": 1,
+    "expl": "Future perfect: will have + V3."
+  },
+  {
+    "q": "The supplier ___ the parts yesterday.",
+    "choices": [
+      "delivers",
+      "delivered",
+      "has delivered",
+      "was delivering"
+    ],
+    "answer": 1,
+    "expl": "yesterday → past simple."
+  },
+  {
+    "q": "If the price ___ lower, more customers would sign up.",
+    "choices": [
+      "is",
+      "were",
+      "had been",
+      "will be"
+    ],
+    "answer": 1,
+    "expl": "สมมติปัจจุบัน → were."
+  },
+  {
+    "q": "If you ___ earlier, you would have caught the bus.",
+    "choices": [
+      "left",
+      "had left",
+      "would leave",
+      "have left"
+    ],
+    "answer": 1,
+    "expl": "เงื่อนไขที่ 3 → had + V3."
+  },
+  {
+    "q": "Management aims to ___ costs this quarter.",
+    "choices": [
+      "reduce",
+      "deduct",
+      "lessen",
+      "cut down of"
+    ],
+    "answer": 0,
+    "expl": "reduce costs."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "The new policy is highly ___.",
+    "choices": [
+      "effect",
+      "effective",
+      "effectively",
+      "effectiveness"
+    ],
+    "answer": 1,
+    "expl": "adj. effective."
+  },
+  {
+    "q": "We saw a significant ___ in sales.",
+    "choices": [
+      "increase",
+      "increasing",
+      "increased",
+      "increaseful"
+    ],
+    "answer": 0,
+    "expl": "a significant increase."
+  },
+  {
+    "q": "The team worked hard; ___, the deadline was still missed.",
+    "choices": [
+      "however",
+      "therefore",
+      "moreover",
+      "for example"
+    ],
+    "answer": 0,
+    "expl": "ขัดแย้ง → however."
+  },
+  {
+    "q": "Sales fell last quarter; ___, we must revise our plan.",
+    "choices": [
+      "as a result",
+      "however",
+      "furthermore",
+      "for instance"
+    ],
+    "answer": 0,
+    "expl": "ผลลัพธ์ → as a result."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "We need ___ approval from the board before launching.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "approval ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "If you ___ earlier, you would have caught the bus.",
+    "choices": [
+      "left",
+      "had left",
+      "would leave",
+      "have left"
+    ],
+    "answer": 1,
+    "expl": "เงื่อนไขที่ 3 → had + V3."
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 1",
+    "choices": [
+      "provide",
+      "prevent",
+      "prove",
+      "provoke"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 2",
+    "choices": [
+      "increase",
+      "increasing",
+      "to increase",
+      "increased"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  }
+]

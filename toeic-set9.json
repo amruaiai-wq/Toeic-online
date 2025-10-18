@@ -1,0 +1,222 @@
+[
+  {
+    "q": "She bought ___ new printer yesterday.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "He is ___ honest employee.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 1,
+    "expl": "honest ขึ้นต้นด้วยเสียงสระ → an."
+  },
+  {
+    "q": "He has worked here ___ 2019.",
+    "choices": [
+      "for",
+      "since",
+      "from",
+      "in"
+    ],
+    "answer": 1,
+    "expl": "since + จุดเวลา / for + ระยะเวลา."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "We ___ feedback while testing the beta.",
+    "choices": [
+      "collect",
+      "collected",
+      "were collecting",
+      "will collect"
+    ],
+    "answer": 2,
+    "expl": "ช่วงเวลาหนึ่งในอดีต → past continuous."
+  },
+  {
+    "q": "By next week, they ___ the system upgrade.",
+    "choices": [
+      "finish",
+      "will have finished",
+      "have finished",
+      "are finishing"
+    ],
+    "answer": 1,
+    "expl": "Future perfect: will have + V3."
+  },
+  {
+    "q": "If it rains, we ___ the outdoor event.",
+    "choices": [
+      "cancel",
+      "would cancel",
+      "canceled",
+      "had canceled"
+    ],
+    "answer": 0,
+    "expl": "Type 1."
+  },
+  {
+    "q": "If you ___ earlier, you would have caught the bus.",
+    "choices": [
+      "left",
+      "had left",
+      "would leave",
+      "have left"
+    ],
+    "answer": 1,
+    "expl": "เงื่อนไขที่ 3 → had + V3."
+  },
+  {
+    "q": "We need to ___ a meeting with the client.",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "set"
+    ],
+    "answer": 3,
+    "expl": "set a meeting."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "We saw a significant ___ in sales.",
+    "choices": [
+      "increase",
+      "increasing",
+      "increased",
+      "increaseful"
+    ],
+    "answer": 0,
+    "expl": "a significant increase."
+  },
+  {
+    "q": "The new policy is highly ___.",
+    "choices": [
+      "effect",
+      "effective",
+      "effectively",
+      "effectiveness"
+    ],
+    "answer": 1,
+    "expl": "adj. effective."
+  },
+  {
+    "q": "The team worked hard; ___, the deadline was still missed.",
+    "choices": [
+      "however",
+      "therefore",
+      "moreover",
+      "for example"
+    ],
+    "answer": 0,
+    "expl": "ขัดแย้ง → however."
+  },
+  {
+    "q": "We tested the prototype; ___, we improved the UI.",
+    "choices": [
+      "similarly",
+      "afterward",
+      "meanwhile",
+      "otherwise"
+    ],
+    "answer": 1,
+    "expl": "ลำดับเวลา → afterward."
+  },
+  {
+    "q": "The CEO made a ___ decision.",
+    "choices": [
+      "strategic",
+      "strategy",
+      "strategize",
+      "strategically"
+    ],
+    "answer": 0,
+    "expl": "adj. strategic."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "Management aims to ___ costs this quarter.",
+    "choices": [
+      "reduce",
+      "deduct",
+      "lessen",
+      "cut down of"
+    ],
+    "answer": 0,
+    "expl": "reduce costs."
+  },
+  {
+    "q": "If the price ___ lower, more customers would sign up.",
+    "choices": [
+      "is",
+      "were",
+      "had been",
+      "will be"
+    ],
+    "answer": 1,
+    "expl": "สมมติปัจจุบัน → were."
+  },
+  {
+    "q": "[Cloze] Dear all, Our office will be closed on Monday due to maintenance. Please (___1___) your tasks by Friday and (___2___) any urgent issues via email.  — Blank 1",
+    "choices": [
+      "complete",
+      "compliment",
+      "compete",
+      "compile"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  },
+  {
+    "q": "[Cloze] Dear all, Our office will be closed on Monday due to maintenance. Please (___1___) your tasks by Friday and (___2___) any urgent issues via email.  — Blank 2",
+    "choices": [
+      "report",
+      "reply",
+      "replace",
+      "rely"
+    ],
+    "answer": 1,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  }
+]

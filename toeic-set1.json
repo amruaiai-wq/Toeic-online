@@ -1,0 +1,222 @@
+[
+  {
+    "q": "He is ___ honest employee.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 1,
+    "expl": "honest ขึ้นต้นด้วยเสียงสระ → an."
+  },
+  {
+    "q": "She bought ___ new printer yesterday.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "Our office is located ___ the 12th floor.",
+    "choices": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "answer": 1,
+    "expl": "ชั้นของอาคาร → on the 12th floor."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "The supplier ___ the parts yesterday.",
+    "choices": [
+      "delivers",
+      "delivered",
+      "has delivered",
+      "was delivering"
+    ],
+    "answer": 1,
+    "expl": "yesterday → past simple."
+  },
+  {
+    "q": "We ___ feedback while testing the beta.",
+    "choices": [
+      "collect",
+      "collected",
+      "were collecting",
+      "will collect"
+    ],
+    "answer": 2,
+    "expl": "ช่วงเวลาหนึ่งในอดีต → past continuous."
+  },
+  {
+    "q": "If the price ___ lower, more customers would sign up.",
+    "choices": [
+      "is",
+      "were",
+      "had been",
+      "will be"
+    ],
+    "answer": 1,
+    "expl": "สมมติปัจจุบัน → were."
+  },
+  {
+    "q": "If it rains, we ___ the outdoor event.",
+    "choices": [
+      "cancel",
+      "would cancel",
+      "canceled",
+      "had canceled"
+    ],
+    "answer": 0,
+    "expl": "Type 1."
+  },
+  {
+    "q": "They will ___ a presentation tomorrow.",
+    "choices": [
+      "give",
+      "make",
+      "do",
+      "take"
+    ],
+    "answer": 0,
+    "expl": "give a presentation."
+  },
+  {
+    "q": "Management aims to ___ costs this quarter.",
+    "choices": [
+      "reduce",
+      "deduct",
+      "lessen",
+      "cut down of"
+    ],
+    "answer": 0,
+    "expl": "reduce costs."
+  },
+  {
+    "q": "Her ___ to detail is impressive.",
+    "choices": [
+      "attend",
+      "attendance",
+      "attentive",
+      "attention"
+    ],
+    "answer": 3,
+    "expl": "คำนาม attention."
+  },
+  {
+    "q": "We saw a significant ___ in sales.",
+    "choices": [
+      "increase",
+      "increasing",
+      "increased",
+      "increaseful"
+    ],
+    "answer": 0,
+    "expl": "a significant increase."
+  },
+  {
+    "q": "Sales fell last quarter; ___, we must revise our plan.",
+    "choices": [
+      "as a result",
+      "however",
+      "furthermore",
+      "for instance"
+    ],
+    "answer": 0,
+    "expl": "ผลลัพธ์ → as a result."
+  },
+  {
+    "q": "The device is cheap; ___, it is durable.",
+    "choices": [
+      "in contrast",
+      "moreover",
+      "therefore",
+      "consequently"
+    ],
+    "answer": 1,
+    "expl": "เติมข้อมูล → moreover."
+  },
+  {
+    "q": "We need ___ approval from the board before launching.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "approval ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "The device is cheap; ___, it is durable.",
+    "choices": [
+      "in contrast",
+      "moreover",
+      "therefore",
+      "consequently"
+    ],
+    "answer": 1,
+    "expl": "เติมข้อมูล → moreover."
+  },
+  {
+    "q": "She ___ to the new policy already.",
+    "choices": [
+      "has adapted",
+      "adapted",
+      "will adapt",
+      "is adapting"
+    ],
+    "answer": 0,
+    "expl": "Present perfect กับ already."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 1",
+    "choices": [
+      "provide",
+      "prevent",
+      "prove",
+      "provoke"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 2",
+    "choices": [
+      "increase",
+      "increasing",
+      "to increase",
+      "increased"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  }
+]

@@ -1,0 +1,222 @@
+[
+  {
+    "q": "We need ___ approval from the board before launching.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "approval ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "He is ___ honest employee.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 1,
+    "expl": "honest ขึ้นต้นด้วยเสียงสระ → an."
+  },
+  {
+    "q": "He has worked here ___ 2019.",
+    "choices": [
+      "for",
+      "since",
+      "from",
+      "in"
+    ],
+    "answer": 1,
+    "expl": "since + จุดเวลา / for + ระยะเวลา."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "She ___ to the new policy already.",
+    "choices": [
+      "has adapted",
+      "adapted",
+      "will adapt",
+      "is adapting"
+    ],
+    "answer": 0,
+    "expl": "Present perfect กับ already."
+  },
+  {
+    "q": "We ___ feedback while testing the beta.",
+    "choices": [
+      "collect",
+      "collected",
+      "were collecting",
+      "will collect"
+    ],
+    "answer": 2,
+    "expl": "ช่วงเวลาหนึ่งในอดีต → past continuous."
+  },
+  {
+    "q": "If you ___ earlier, you would have caught the bus.",
+    "choices": [
+      "left",
+      "had left",
+      "would leave",
+      "have left"
+    ],
+    "answer": 1,
+    "expl": "เงื่อนไขที่ 3 → had + V3."
+  },
+  {
+    "q": "Unless you ___ your password, you can't log in.",
+    "choices": [
+      "reset",
+      "will reset",
+      "resetting",
+      "have reset"
+    ],
+    "answer": 0,
+    "expl": "Unless + present simple."
+  },
+  {
+    "q": "We need to ___ a meeting with the client.",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "set"
+    ],
+    "answer": 3,
+    "expl": "set a meeting."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "Her ___ to detail is impressive.",
+    "choices": [
+      "attend",
+      "attendance",
+      "attentive",
+      "attention"
+    ],
+    "answer": 3,
+    "expl": "คำนาม attention."
+  },
+  {
+    "q": "The CEO made a ___ decision.",
+    "choices": [
+      "strategic",
+      "strategy",
+      "strategize",
+      "strategically"
+    ],
+    "answer": 0,
+    "expl": "adj. strategic."
+  },
+  {
+    "q": "Sales fell last quarter; ___, we must revise our plan.",
+    "choices": [
+      "as a result",
+      "however",
+      "furthermore",
+      "for instance"
+    ],
+    "answer": 0,
+    "expl": "ผลลัพธ์ → as a result."
+  },
+  {
+    "q": "We tested the prototype; ___, we improved the UI.",
+    "choices": [
+      "similarly",
+      "afterward",
+      "meanwhile",
+      "otherwise"
+    ],
+    "answer": 1,
+    "expl": "ลำดับเวลา → afterward."
+  },
+  {
+    "q": "Please submit the report ___ email.",
+    "choices": [
+      "by",
+      "via",
+      "with",
+      "on"
+    ],
+    "answer": 1,
+    "expl": "ช่องทาง → via email."
+  },
+  {
+    "q": "Please ___ an eye on the inventory levels.",
+    "choices": [
+      "keep",
+      "hold",
+      "take",
+      "make"
+    ],
+    "answer": 0,
+    "expl": "keep an eye on."
+  },
+  {
+    "q": "The meeting is scheduled ___ 2 p.m. on Friday.",
+    "choices": [
+      "in",
+      "at",
+      "on",
+      "by"
+    ],
+    "answer": 1,
+    "expl": "เวลาเฉพาะจุด → at 2 p.m."
+  },
+  {
+    "q": "He has worked here ___ 2019.",
+    "choices": [
+      "for",
+      "since",
+      "from",
+      "in"
+    ],
+    "answer": 1,
+    "expl": "since + จุดเวลา / for + ระยะเวลา."
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 1",
+    "choices": [
+      "provide",
+      "prevent",
+      "prove",
+      "provoke"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  },
+  {
+    "q": "[Cloze] The training program aims to (___1___) employees with new skills and (___2___) overall productivity across teams.  — Blank 2",
+    "choices": [
+      "increase",
+      "increasing",
+      "to increase",
+      "increased"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  }
+]

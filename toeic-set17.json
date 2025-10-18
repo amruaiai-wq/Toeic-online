@@ -1,0 +1,222 @@
+[
+  {
+    "q": "She bought ___ new printer yesterday.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "We need ___ approval from the board before launching.",
+    "choices": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "answer": 0,
+    "expl": "approval ไม่เฉพาะเจาะจง → a."
+  },
+  {
+    "q": "Our office is located ___ the 12th floor.",
+    "choices": [
+      "in",
+      "on",
+      "at",
+      "to"
+    ],
+    "answer": 1,
+    "expl": "ชั้นของอาคาร → on the 12th floor."
+  },
+  {
+    "q": "He has worked here ___ 2019.",
+    "choices": [
+      "for",
+      "since",
+      "from",
+      "in"
+    ],
+    "answer": 1,
+    "expl": "since + จุดเวลา / for + ระยะเวลา."
+  },
+  {
+    "q": "The supplier ___ the parts yesterday.",
+    "choices": [
+      "delivers",
+      "delivered",
+      "has delivered",
+      "was delivering"
+    ],
+    "answer": 1,
+    "expl": "yesterday → past simple."
+  },
+  {
+    "q": "She ___ to the new policy already.",
+    "choices": [
+      "has adapted",
+      "adapted",
+      "will adapt",
+      "is adapting"
+    ],
+    "answer": 0,
+    "expl": "Present perfect กับ already."
+  },
+  {
+    "q": "If the price ___ lower, more customers would sign up.",
+    "choices": [
+      "is",
+      "were",
+      "had been",
+      "will be"
+    ],
+    "answer": 1,
+    "expl": "สมมติปัจจุบัน → were."
+  },
+  {
+    "q": "Unless you ___ your password, you can't log in.",
+    "choices": [
+      "reset",
+      "will reset",
+      "resetting",
+      "have reset"
+    ],
+    "answer": 0,
+    "expl": "Unless + present simple."
+  },
+  {
+    "q": "We need to ___ a meeting with the client.",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "set"
+    ],
+    "answer": 3,
+    "expl": "set a meeting."
+  },
+  {
+    "q": "They will ___ a presentation tomorrow.",
+    "choices": [
+      "give",
+      "make",
+      "do",
+      "take"
+    ],
+    "answer": 0,
+    "expl": "give a presentation."
+  },
+  {
+    "q": "Her ___ to detail is impressive.",
+    "choices": [
+      "attend",
+      "attendance",
+      "attentive",
+      "attention"
+    ],
+    "answer": 3,
+    "expl": "คำนาม attention."
+  },
+  {
+    "q": "We saw a significant ___ in sales.",
+    "choices": [
+      "increase",
+      "increasing",
+      "increased",
+      "increaseful"
+    ],
+    "answer": 0,
+    "expl": "a significant increase."
+  },
+  {
+    "q": "Sales fell last quarter; ___, we must revise our plan.",
+    "choices": [
+      "as a result",
+      "however",
+      "furthermore",
+      "for instance"
+    ],
+    "answer": 0,
+    "expl": "ผลลัพธ์ → as a result."
+  },
+  {
+    "q": "The device is cheap; ___, it is durable.",
+    "choices": [
+      "in contrast",
+      "moreover",
+      "therefore",
+      "consequently"
+    ],
+    "answer": 1,
+    "expl": "เติมข้อมูล → moreover."
+  },
+  {
+    "q": "If you ___ earlier, you would have caught the bus.",
+    "choices": [
+      "left",
+      "had left",
+      "would leave",
+      "have left"
+    ],
+    "answer": 1,
+    "expl": "เงื่อนไขที่ 3 → had + V3."
+  },
+  {
+    "q": "We need to ___ a meeting with the client.",
+    "choices": [
+      "do",
+      "make",
+      "have",
+      "set"
+    ],
+    "answer": 3,
+    "expl": "set a meeting."
+  },
+  {
+    "q": "We saw a significant ___ in sales.",
+    "choices": [
+      "increase",
+      "increasing",
+      "increased",
+      "increaseful"
+    ],
+    "answer": 0,
+    "expl": "a significant increase."
+  },
+  {
+    "q": "If the price ___ lower, more customers would sign up.",
+    "choices": [
+      "is",
+      "were",
+      "had been",
+      "will be"
+    ],
+    "answer": 1,
+    "expl": "สมมติปัจจุบัน → were."
+  },
+  {
+    "q": "[Cloze] Thank you for your (___1___) to this project. Your (___2___) efforts have made a real difference.  — Blank 1",
+    "choices": [
+      "contribution",
+      "contributor",
+      "contribute",
+      "contributing"
+    ],
+    "answer": 0,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  },
+  {
+    "q": "[Cloze] Thank you for your (___1___) to this project. Your (___2___) efforts have made a real difference.  — Blank 2",
+    "choices": [
+      "consistent",
+      "consistently",
+      "consistency",
+      "consist"
+    ],
+    "answer": 1,
+    "expl": "เติมคำที่เหมาะสมในบริบทธุรกิจ"
+  }
+]
